@@ -1,7 +1,9 @@
 package fca.cafeteria.data;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.List;
 
 @Entity
 @Table(name = "tingrediente")
@@ -11,15 +13,18 @@ public class Ingrediente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private int id;
 
-    @Column(name = "nombre", nullable = false)
+    @Column(nullable = false)
     private String nombre;
 
-    @Column(name = "descripcion")
     private String descripcion;
 
-    @Column(name = "costo", nullable = false)
+    @Column(nullable = false)
     private float costo;
+
+    // Relación con la tabla intermedia
+    @OneToMany(mappedBy = "ingrediente")
+    private List<BebidaIngrediente> bebidas;
 }
+
